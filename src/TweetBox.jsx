@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./TweetBox.css";
-import { Avatar, Button } from "@material-ui/core";
+import { Avatar, Button } from "@mui/material";
 
 
-function TweetBox() {
+function TweetBox(props) {
   const [tweetMessage, setTweetMessage] = useState("");
   const [tweetImage, setTweetImage] = useState("");
 
@@ -11,6 +11,7 @@ function TweetBox() {
     e.preventDefault();
 
     console.log("sendTweet clicked");
+    props.hola();
 
     setTweetMessage("");
     setTweetImage("");

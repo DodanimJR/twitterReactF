@@ -9,7 +9,7 @@ import Profile from "./profile";
 
 const ProfileView = () => {
     const user = JSON.parse(localStorage.getItem('user')).user;
-    //console.log('PROFILEVIEW',user.token);
+    console.log('PROFILEVIEW',user.token);
     const token = user.token
     
     const logout = () => {
@@ -82,7 +82,7 @@ const ProfileView = () => {
     return(
         <div className='app'>
             <Sidebar />
-            {Tweetr && <Profile user={user}/>}
+            {Tweetr && <Profile user={Tweetr.response}/>}
         </div> 
     )
 }

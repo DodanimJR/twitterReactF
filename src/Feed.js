@@ -59,7 +59,7 @@ function Feed() {
   }
   const postData = (data)=>{
     axios.post( 
-      'http://localhost:8000/follow',
+      'https://twitter-junior-backend.herokuapp.com/follow',
       data,
       config
     )
@@ -90,7 +90,7 @@ function Feed() {
       let data = {
         "likes": parseInt(contadorLikes.innerHTML)
       }
-      let response = await updtateLikes(`http://localhost:8000/post/${id}`,data);
+      let response = await updtateLikes(`https://twitter-junior-backend.herokuapp.com/${id}`,data);
       console.log(response);
     }else{
       corazon.style.color = "red";
@@ -98,7 +98,7 @@ function Feed() {
       let data = {
         "likes": parseInt(contadorLikes.innerHTML)
       }
-      let response = await updtateLikes(`http://localhost:8000/post/${id}`,data);
+      let response = await updtateLikes(`https://twitter-junior-backend.herokuapp.com/${id}`,data);
       console.log(response);
       
     }
@@ -150,7 +150,7 @@ function Feed() {
   }
   const hola = async () => {
     if(token!=null){
-      fetchData("http://localhost:8000/post",setTweets);
+      fetchData("https://twitter-junior-backend.herokuapp.com/post",setTweets);
     }
   }
   const getNewTweets = () => {

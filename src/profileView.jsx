@@ -65,7 +65,7 @@ const ProfileView = () => {
     const hola = async () => {
         if(localStorage.getItem("token") != null){
             console.log("hola");
-            fetchData(`http://localhost:8000/user/${id}`,setTweetr);
+            fetchData(`https://twitter-junior-backend.herokuapp.com/user/${id}`,setTweetr);
         }
     }
     useEffect(()=>{

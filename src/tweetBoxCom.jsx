@@ -50,7 +50,7 @@ function TweetBoxCom(props) {
   const [tweetMessage, setTweetMessage] = useState("");
   const postData = (data)=>{
     axios.post( 
-      'http://localhost:8000/reply',
+      'https://twitter-junior-backend.herokuapp.com/reply',
       data,
       config
     )

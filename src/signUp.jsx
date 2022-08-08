@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import TwitterIcon from "@mui/icons-material/Twitter";
 const SignUp = () => {
     const postData = async (url,data) => {
         console.log('url',url);
@@ -26,7 +26,7 @@ const SignUp = () => {
             "password":password
         }
         console.log(data);
-        let response = await postData("http://localhost:8000/signup",data);
+        let response = await postData("https://twitter-junior-backend.herokuapp.com/signup",data);
         
         if(response){
             console.log(response.status);
@@ -63,16 +63,22 @@ const SignUp = () => {
                 padding: "0.25em 0.5em",
                 width: "100%",
                 }}>
-                <form onSubmit={signupClickHandler} style={{
-                    display: "flex",
-                    flexDirection: "row",
-                }}>
-                    <input type="username" id="username"  name="username" placeholder="username" />
-                    <input type="name" id="name"  name="name" placeholder="name" />
-                    <input type="email" id="email"  name="email" placeholder="email" />
+                    <div className="dodiGuapa">
+                        <TwitterIcon sx={{color:"#1d9bf0",fontSize:"150px"}}/>
+                    </div>
+                <form onSubmit={signupClickHandler} >
+                    <div className="dodiBueno">
+                    <input type="text" id="username"  name="username" placeholder="username" />
+                    <br></br>
+                    <input type="text" id="name"  name="name" placeholder="name" />
+                    <br/>
+                    <input type="text" id="email"  name="email" placeholder="email" />
+                    <br/>
                     <input type="password" id="password" name="password" placeholder="password"/>
-                    <input type="submit"  value="Sign Up"/>
-                    </form>
+                    <br/>
+                    <input type="submit"  value="Sign Up"/><br/>
+                    </div>
+                </form>
                     <div id="formFooter">
                     <a className="underlineHover" href="/login">Login</a> <br></br>
                 </div>

@@ -18,3 +18,24 @@ body {
   flex: 1;
   padding: 10px;
 }
+.formulario{
+  padding: 20px;
+  width: 100%;
+  max-height: fit-content;
+  border: 1px solid black;
+}
+input[type=text],[type=submit],[type=password]{
+  margin-top: 10px;
+  width: 300px;
+  height: 50px;
+  border: none;
+  background-color: #e6ecf0;
+}
+.dodiBueno{
+  align-items: center;
+  text-align: center;
+}
+.dodiGuapa{
+  align-items: center;
+  text-align: center;
+}

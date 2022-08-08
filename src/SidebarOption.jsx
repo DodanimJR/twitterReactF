@@ -5,7 +5,7 @@ function SidebarOption({ active, text, Icon,}) {
   const user = JSON.parse(localStorage.getItem('user')).user;
   const clickHandler = () => {
     console.log("clicked", text);
-    if(text=='Profile'){
+    if(text==='Profile'){
       window.location.href = "/profile/"+ user.id.toString();
     }else{
       window.location.href = `/${text.toLowerCase()}`

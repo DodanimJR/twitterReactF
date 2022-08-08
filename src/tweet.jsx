@@ -30,8 +30,9 @@ const Tweet = (props)=>{
                     {props.tweet.text}
                 </Typography>
             </CardContent>
-            </Card>
             <Replies replys={props.tweet.replys}/>
+            </Card>
+            
         </div>:
         <h1>loading...</h1>
         

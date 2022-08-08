@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import './App.css';
 
 const login = () => {
     const postData = async (url,data) => {
@@ -39,27 +40,42 @@ const login = () => {
 
 
     return (
-        <body className="html">
-            <div className="wrapper fadeInDown">
-                <div id="formContent">
-                <div className="fadeIn first">
-                <img src="https://cdn-icons-png.flaticon.com/512/725/725335.png" id="icon" alt="User Icon" />
-                </div>
-                <form onSubmit={loginClickHandler}>
-                <input type="email" id="email" className="fadeIn second" name="email" placeholder="email" />
-                <input type="password" id="password" className="fadeIn third" name="password" placeholder="password"/>
-                
-                <input type="submit" className="fadeIn fourth" value="Log in"/>
-                
-
-                </form>
-                <div id="formFooter">
-                <a className="underlineHover" href="/register">Register</a> <br></br>
-                <a className="underlineHover" href="#">Forgot Password?</a>
+            <div className="app" style={{
+                display: "flex",
+            }}>
+                <div style={{
+                    display: "flex",
+                    width: "100%",
+                }}>
+                    <div className="fadeIn first" style={{
+                        maxWidth:"50%"
+                    }}>
+                    <img src="https://cdn.cms-twdigitalassets.com/content/dam/help-twitter/logos/htc-summary-card.jpg.twimg.768.jpg" id="icon" alt="User Icon" style={{
+                        width:"100%",
+                        height:"100%"
+                    }} />
+                    </div >
+                <div style={{
+                    marginRight: "4px",
+                    fontSize: "16px",
+                    letterSpacing: "2px",
+                    color: "#000000",
+                    border: "2px solid #50b7f5",
+                    padding: "0.25em 0.5em",
+                    width: "100%",
+                    }}>
+                    <form onSubmit={loginClickHandler}>
+                    <input type="email" id="email" className="fadeIn second" name="email" placeholder="email" />
+                    <input type="password" id="password" className="fadeIn third" name="password" placeholder="password"/>
+                    <input type="submit" className="fadeIn fourth" value="Log in"/>               
+                    </form>
+                    <div id="formFooter">
+                    <a className="underlineHover" href="/signup">Register</a> <br></br>
+                    <a className="underlineHover" href="#">Forgot Password?</a>
+                    </div>
                 </div>
               </div>
            </div>
-           </body>
     );
 }
 export default login;

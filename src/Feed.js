@@ -57,20 +57,6 @@ function Feed() {
       'Authorization': 'Bearer ' + validToken()
     }
   }
-  const clickHandlerFav = (id) => {
-    console.log("clickedID", id);
-    let corazon =document.getElementById(id);
-    let contadorLikes =document.getElementById('likes'+id);
-    
-    if (corazon.style.color === "red") {
-      corazon.style.color = "purple";
-      contadorLikes.innerHTML=parseInt(contadorLikes.innerHTML)-1;
-    }else{
-      corazon.style.color = "red";
-      contadorLikes.innerHTML=parseInt(contadorLikes.innerHTML)+1;
-      
-    }
-  }
   const postData = (data)=>{
     axios.post( 
       'http://localhost:8000/follow',
@@ -82,6 +68,42 @@ function Feed() {
     } )
     .catch()
   }
+  const updtateLikes=(url,data)=>{
+    axios.put( 
+      url,
+      data,
+      config
+    )
+    .then( ( response ) => {
+      console.log( response )
+    } )
+    .catch()
+  }
+  const clickHandlerFav = async (id) => {
+    console.log("clickedID", id);
+    let corazon =document.getElementById(id);
+    let contadorLikes =document.getElementById('likes'+id);
+    
+    if (corazon.style.color === "red") {
+      corazon.style.color = "purple";
+      contadorLikes.innerHTML=parseInt(contadorLikes.innerHTML)-1;
+      let data = {
+        "likes": parseInt(contadorLikes.innerHTML)
+      }
+      let response = await updtateLikes(`http://localhost:8000/post/${id}`,data);
+      console.log(response);
+    }else{
+      corazon.style.color = "red";
+      contadorLikes.innerHTML=parseInt(contadorLikes.innerHTML)+1;
+      let data = {
+        "likes": parseInt(contadorLikes.innerHTML)
+      }
+      let response = await updtateLikes(`http://localhost:8000/post/${id}`,data);
+      console.log(response);
+      
+    }
+  }
+  
   const clickHandlerFollow = async (id,author) => {
     console.log("clickedID", id);
     console.log('author',author);
@@ -99,7 +121,7 @@ function Feed() {
     if(followerId!=followeeId){
       if(userFollowsIds.includes(followeeId)){
         console.log("YA LO SIGUE");
-        
+
       }else{
         if (boton.innerHTML == "Follow") {
           let response = await postData({
@@ -107,12 +129,8 @@ function Feed() {
             "followingId":followeeId
           });
           console.log(response);
-          boton.style.backgroundColor = "purple";
-          boton.style.color="white";
-          boton.innerHTML="Following";
+          boton.innerHTML="Unfollow";
         }else{
-          boton.style.backgroundColor = "white";
-          boton.style.color="black";
           boton.innerHTML="Follow";
         }
       }

@@ -10,8 +10,15 @@ const Replies = (props) => {
     return (
         props.replys && props.replys.map((el,i)=>
         <Card key={i} sx={{
-            width: '700px',
-        }}>
+            marginRight: "4px",
+            fontSize: "16px",
+            letterSpacing: "2px",
+            color: "#000000",
+            border: "2px solid #50b7f5",
+            padding: "0.25em 0.5em",
+            position: "relative",
+            maxWidth: "100%",
+          }}>
                 <CardHeader avatar={<Avatar src={el.author['avatar']}/>} 
                 title={
                     <div>

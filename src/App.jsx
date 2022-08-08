@@ -12,6 +12,7 @@ import {
   Link
 } from "react-router-dom";
 import TweetView from './tweetView';
+import SignUp from './signUp';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Router>
       <Routes>
         <Route exact path="/" element={<Login/>}></Route>
+        <Route exact path="/signup" element={<SignUp/>}></Route>
         <Route exact path="/login" element={<Login />}></Route>
         <Route exact path="/home" element={<Home />}></Route>
         <Route exact path="/profile/:id" element={<ProfileView/>}></Route>

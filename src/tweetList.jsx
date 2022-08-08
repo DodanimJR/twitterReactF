@@ -19,7 +19,7 @@ const theme = createTheme({
     },
     palette: {
       primary: {
-        main: '#550a8a',
+        main: '#50b7f5',
         darker: '#9e88ae',
       },
       neutral: {
@@ -34,9 +34,7 @@ const theme = createTheme({
     },
     typography:{
       fontFamily: [
-        'Edu',
-        'SA',
-        'cursive',
+        'montserrat',
       ].join(','),
     },
     card:{
@@ -70,14 +68,13 @@ const TweetList = (props)=>{
       <ThemeProvider theme={theme}>
         <Card key={i} sx={{
           marginRight: "4px",
-      fontSize: "16px",
-      letterSpacing: "2px",
-      color: "#000000",
-      border: "3px solid",
-      padding: "0.25em 0.5em",
-      boxShadow: "1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px",
-      position: "relative",
-      maxWidth: 285,
+          fontSize: "16px",
+          letterSpacing: "2px",
+          color: "#000000",
+          border: "2px solid #50b7f5",
+          padding: "0.25em 0.5em",
+          position: "relative",
+          maxWidth: "100%",
         }} style={{margin: 8}} theme={theme} raised>
             <CardHeader avatar={
                 <Avatar src={el.author['avatar']}/>
@@ -89,7 +86,7 @@ const TweetList = (props)=>{
             action={
                 <Button size="small" id={"postAuthor"+el.id} sx={{
                     backgroundColor: 'white',
-                    border: '1px solid purple',
+                    border: '1px solid #50b7f5',
                 }}  onClick={()=>clickHandlerFollow(el.id,el.author)} >
                   {user.id!==el.author.id && userFollowsIds.includes(el.author['id']) ? "Unfollow" : "Follow"}
                 </Button>
@@ -115,8 +112,9 @@ const TweetList = (props)=>{
                 <ShareIcon></ShareIcon>
             </Button>
           </CardActions>
+          <ReplyList replys={el.replys[0]}/>
         </Card>
-        <ReplyList replys={el.replys[0]}/>
+        
             
       </ThemeProvider>
         

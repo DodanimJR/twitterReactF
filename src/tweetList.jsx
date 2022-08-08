@@ -2,8 +2,16 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Button, CardActions } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import Avatar from '@mui/material/Avatar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CardHeader from '@mui/material/CardHeader';
+import { useState } from 'react';
+import ResponsiveDialog from './responsiveDialog';
+import ReplyList from './reply';
+
 
 const theme = createTheme({
     status: {
@@ -40,11 +48,12 @@ const theme = createTheme({
   });
 
 const TweetList = (props)=>{
-
-//   const clickHandler=(id)=>{
-//     props.setclickedIndex(id);
-//     console.log("elementoID CLICKEADO",props.clickedIndex);  
-//   }
+    const userAvatar = localStorage.getItem("userAvatar");
+    const clickHandlerFav=(id)=>{
+        console.log("clickHandlerFav");
+        props.clickHandlerFav(id);
+    }
+    
   console.log("Lista que entra:",props.tweets);
   return(
     props.tweets && props.tweets.map((el, i) => 
@@ -60,26 +69,38 @@ const TweetList = (props)=>{
       boxShadow: "1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px",
       position: "relative",
       maxWidth: 285,
-        }} style={{margin: 8}} theme={theme} className="Dodi" raised>
-        
+        }} style={{margin: 8}} theme={theme} raised>
+            <CardHeader avatar={
+                <Avatar src={el.author['avatar']}/>
+            } title={
+                <Typography variant="h6" component="div" sx={{ fontWeight: 'bold' }}>
+                    {el.author['username']}
+                </Typography>
+            }>
+            </CardHeader>
           <CardContent>
-            <Typography variant='h4' sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-              {el.author['username']}
-            </Typography>
             <Typography variant='h5' sx={{ mb: 1.5 }} color="text.secondary">
               {el.text}
             </Typography>
-            <Typography variant="body2">
-              Likes: {el.likes}
-            </Typography>
           </CardContent>
           <CardActions>
-          <Button size="small" color="primary"  >
-            view
-          </Button>
+            <ResponsiveDialog postId={el.id} author={el.author} getNewTweets={props.getNewTweets}/>
+            <Typography variant="body2">
+                {el.replys.length}
+            </Typography>
+            <Button size="small" color="primary" id={el.id}  onClick={()=>clickHandlerFav(el.id)} >
+                <FavoriteIcon /> 
+            </Button>
+            <Typography variant="body2" id={'likes'+el.id}>
+                {el.likes}
+            </Typography>
+            <Button size="small" color="primary"  >
+                <ShareIcon></ShareIcon>
+            </Button>
           </CardActions>
-        
         </Card>
+        <ReplyList replys={el.replys[0]}/>
+            
       </ThemeProvider>
         
     

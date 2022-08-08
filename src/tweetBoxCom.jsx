@@ -3,16 +3,18 @@ import "./TweetBox.css";
 import { Avatar, Button } from "@mui/material";
 import axios from "axios";
 
-function TweetBox(props) {
-  const userAvatar = props.userAvatar;
+function TweetBoxCom(props) {
+  console.log("props", props);
+  const userAvatar = localStorage.getItem("userAvatar");
   const validToken = () => {
     if (localStorage.getItem("token") != null) {
       const token = localStorage.getItem("token");
       return token;
     }else{
-      return null;
+      return null; 
     }
   }
+  
   let config = {
     headers: {
       'Authorization': 'Bearer ' + validToken()
@@ -21,7 +23,7 @@ function TweetBox(props) {
   const [tweetMessage, setTweetMessage] = useState("");
   const postData = (data)=>{
     axios.post( 
-      'http://localhost:8000/post',
+      'http://localhost:8000/reply',
       data,
       config
     )
@@ -39,13 +41,15 @@ function TweetBox(props) {
       
       let data = {
         "authorId": parseInt(localStorage.getItem("userId")),
+        "postId": parseInt(props.postId),
         "text": tweetMessage,
       }
       console.log("data", data);
       postData(data);
-      
-      setTweetMessage("");
       props.getNewTweets();
+      setTweetMessage("");
+      
+
     }else{
       alert("No se puede enviar un tweet vacío");
     }
@@ -55,6 +59,7 @@ function TweetBox(props) {
     <div className="tweetBox">
       <form>
         <div className="tweetBox__input">
+          <h1>Replying to @{props.author['username']}</h1>
           <Avatar src={userAvatar} />
           <input
             onChange={(e) => setTweetMessage(e.target.value)}
@@ -75,4 +80,4 @@ function TweetBox(props) {
   );
 }
 
-export default TweetBox;
+export default TweetBoxCom;

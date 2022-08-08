@@ -48,10 +48,19 @@ const theme = createTheme({
   });
 
 const TweetList = (props)=>{
-    const userAvatar = localStorage.getItem("userAvatar");
+    const user = JSON.parse(localStorage.getItem("user")).user;
+    const userFollowsIds = [];
+    console.log(user.following);
+    for(let follow of user.following){
+        userFollowsIds.push(follow["followingId"]);
+    }
     const clickHandlerFav=(id)=>{
         console.log("clickHandlerFav");
         props.clickHandlerFav(id);
+    }
+    const clickHandlerFollow=(id,author)=>{
+        console.log("clickHandlerFollow");
+        props.clickHandlerFollow(id,author);
     }
     
   console.log("Lista que entra:",props.tweets);
@@ -76,6 +85,14 @@ const TweetList = (props)=>{
                 <Typography variant="h6" component="div" sx={{ fontWeight: 'bold' }}>
                     {el.author['username']}
                 </Typography>
+            }
+            action={
+                <Button size="small" id={"postAuthor"+el.id} sx={{
+                    backgroundColor: 'white',
+                    border: '1px solid purple',
+                }}  onClick={()=>clickHandlerFollow(el.id,el.author)} >
+                  {user.id!==el.author.id && userFollowsIds.includes(el.author['id']) ? "Unfollow" : "Follow"}
+                </Button>
             }>
             </CardHeader>
           <CardContent>

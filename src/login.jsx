@@ -22,9 +22,8 @@ const login = () => {
                 console.log(data.data);
                 if(data.data.response!='Incorrect Password'){
                     console.log(data.data.response);
-                    localStorage.setItem("token",data.data.response.token);
-                    localStorage.setItem('userId',data.data.response.userId);
-                    localStorage.setItem('userAvatar',data.data.response.userAvatar);
+                    localStorage.setItem('user',JSON.stringify(data.data.response));
+                    
                     window.location.href = "/home";
                 }else{
                     alert("Incorrect Password");

@@ -33,7 +33,7 @@ export default function ResponsiveDialog(props) {
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-       <TweetBoxCom handleClose={()=>handleClose()} postId={props.postId} author={props.author} getNewTweets={props.getNewTweets}/>
+       <TweetBoxCom handleClose={()=>handleClose()} postId={props.postId} author={props.author} getNewTweets={props.getNewTweets} user={props.user}/>
       </Dialog>
     </div>
   );

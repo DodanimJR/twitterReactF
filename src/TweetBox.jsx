@@ -1,17 +1,45 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./TweetBox.css";
 import { Avatar, Button } from "@mui/material";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 function TweetBox(props) {
-  const userAvatar = props.userAvatar;
+  const user = JSON.parse(localStorage.getItem('user')).user;
+  console.log('userTweetBox',user);
+  const userAvatar = user.avatar;
+  const token = user.token
+  const logout = () => {
+    localStorage.removeItem("user");
+    
+    window.location.href = "/login";
+
+    token = null;
+
+  }
+
+  useEffect(()=>{
+    
+    if(user.token!=null){
+      //console.log("token is not null",user.token);
+      const decodedToken = jwt_decode(user.token)
+      if(decodedToken.exp*1000 < Date.now()){
+        logout();
+      }
+
+    }
+  },[token]);
+
   const validToken = () => {
-    if (localStorage.getItem("token") != null) {
-      const token = localStorage.getItem("token");
+    
+    if ( user.token != null) {
+      const token = user.token;
       return token;
     }else{
       return null;
     }
+  
+    
   }
   let config = {
     headers: {
@@ -38,7 +66,7 @@ function TweetBox(props) {
     if (tweetMessage !== "") {
       
       let data = {
-        "authorId": parseInt(localStorage.getItem("userId")),
+        "authorId": user.id,
         "text": tweetMessage,
       }
       console.log("data", data);
